@@ -1,0 +1,97 @@
+###### authorship ################
+
+git config --global user.email "vishalkapadi04@gmail.com"
+git config --global user.name "dangerousweapon"
+
+##################################
+......
+
+export CROSS_COMPILE=$(pwd)/bin/aarch64-linux-android-
+export ARCH=arm64 && export SUBARCH=arm64
+....
+mkdir -p out
+make O=out x500_defconfig
+make O=out -j 60 2>&1 | tee build1.log
+
+
+patchelf --replace-needed libssl.so oldlibssl.so proprietary/lib64/libdrmmtkutil.so
+
+.................
+
+export KBUILD_BUILD_USER=vishalk17
+export KBUILD_BUILD_HOST=vishal-vm
+
+mkdir -p out
+make O=out lineage_s2_defconfig
+make O=out -j 60 2>&1 | tee build1.log
+...........\
+mkdir -p out
+make O=out hennessy_defconfig
+make O=out -j 60 2>&1 | tee build1.log
+............
+make -j4 bacon 2>&1 | tee build1.log
+..................
+
+
+
+export LC_ALL=C
+
+------git pull--------
+result of :
+git grep -l '__FUNCTION__' | xargs sed -i 's#__FUNCTION__#__func__#g'
+
+git grep -l 'sprintf(lun_file, CUSTOM_LUN_FILE' | xargs sed -i 's#sprintf(lun_file, CUSTOM_LUN_FILE#//sprintf(lun_file, CUSTOM_LUN_FILE#g'
+
+ sprintf(lun_file, CUSTOM_LUN_FILE, 0);
+
+git pull -s recursive -X theirs <remoterepo or other repo>
+
+Or, simply, for the default repository:
+
+git pull -X theirs
+
+
+If you're already in conflicted state...
+
+git checkout --theirs path/to/file
+
+---------git merge------
+
+git merge --strategy-option theirs
+
+/////////////////////////////////////////////////////
+
+adb logcat *:E
+adb logcat -b radio
+git checkout --theirs * 
+
+git rebase --continue
+
+...................
+
+    local_include_dirs: [
+        "include",
+        "libusb/os",
+    ],
+................
+
+find . -name "*.cs" | xargs grep "GetTypes" -bn --color=auto
+
+
+............
+
+kiwi: Hex-edit sensor blob
+
+* It hardcodes a reference to system/etc/permissions
+* Replace with /vendor/etc/permissions instead
+
+sed -i "s|libcam.client.so|libcam.vendor.so|g" vendor/lib64/sensors.kiwi.so
+
+............
+
+objdump -p x3/proprietary/vendor/lib/mediadrm/libwvdrmengine.so | grep NEEDED
+
+
+sed -i "s|libutils.so|libxshim.so|g" libsrv_um.so
+
+sed -i "s|libcutils.so|libxxshim.so|g" guiext-server
